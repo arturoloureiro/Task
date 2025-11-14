@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.arthur_loureiro.task.R
 import com.arthur_loureiro.task.databinding.FragmentHomeBinding
-import com.arthur_loureiro.task.databinding.FragmentRecoverAccountBinding
 
 class HomeFragment : Fragment() {
 
