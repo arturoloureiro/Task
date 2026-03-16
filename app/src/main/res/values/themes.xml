@@ -7,6 +7,10 @@
         <item name="colorPrimaryVariant">@color/color_variant</item>
         <item name="android:windowBackground">@color/color_default</item>
     </style>
-
     <style name="Theme.Task" parent="Base.Theme.Task" />
+
+    <style name="CustomTabLayout" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
