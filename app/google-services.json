@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200163104595",
+    "project_id": "kanban-17ab4",
+    "storage_bucket": "kanban-17ab4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200163104595:android:08147fa1d1338e044073a6",
+        "android_client_info": {
+          "package_name": "com.arthur_loureiro.task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk03xIpEh0Nh3ccAdZ70JW9VfYOn646Nw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
