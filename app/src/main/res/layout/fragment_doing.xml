@@ -6,9 +6,4 @@
     tools:context=".ui.DoingFragment">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/status_task_doing" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,7 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
         Handler(Looper.getMainLooper()).postDelayed({ checkAuth() }, 3000)
     }
 
