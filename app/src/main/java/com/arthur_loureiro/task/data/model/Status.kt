@@ -1,0 +1,7 @@
+package com.arthur_loureiro.task.data.model
+
+enum class Status {
+    TODO,
+    DOING,
+    DONE
+}
