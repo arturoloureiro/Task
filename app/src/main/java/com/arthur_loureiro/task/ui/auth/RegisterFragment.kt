@@ -19,6 +19,8 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,7 +62,6 @@ class RegisterFragment : Fragment() {
     
     private fun registerUser(email: String, password: String){
         try {
-            val auth = FirebaseAuth.getInstance()
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->

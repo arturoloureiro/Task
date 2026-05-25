@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Task</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-
     <!-- Status task -->
     <string name="status_task_todo">A Fazer</string>
     <string name="status_task_doing">Fazendo</string>
@@ -18,11 +16,17 @@
     <string name="password_text">Senha!</string>
     <string name="email_empty">Preencha seu e-mail!</string>
     <string name="email_text">E-mail</string>
+    <string name="error_generic">Ocorreu um erro! Por favor tente novamente mais tarde.</string>
 
     <!-- Login Fragment -->
     <string name="text_title_login_fragment">Login</string>
     <string name="text_button_register_login_fragment">Criar conta</string>
     <string name="text_button_recover_login_fragment">Recuperar conta</string>
+
+    <!-- Home Fragment -->
+    <string name="text_title_dialog_confira_logout">Aperte em confirmar para sair da sua conta</string>
+    <string name="text_button_dialog_confirm_logout">Aperte em confirmar para sair da sua conta</string>
+    <string name="text_message_dialog_confirm_logout">Confirmar</string>
 
     <!-- Register Fragment -->
     <string name="email_empty_register_fragment">Preencha um e-mail válido.</string>
@@ -36,7 +40,9 @@
     </string>
     <string name="text_title_toolbar_recover_account_fragment">Recuperar conta</string>
     <string name="text_button_recover_account_fragment">Enviar</string>
+    <string name="text_message_recover_account_fragment">Um e-mail foi enviado para sua caixa de entrada com o link de recuperação de senha.</string>
 
     <!-- Form Task Fragment -->
-    <string name="description_empty_form_task_fragment">Preencha uma descrição.</string>
+    <string name="description_empty_form_task_fragment">Preencha uma descrição!</string>
+    <string name="text_save_sucess_form_task_fragment">Tarefa salva com sucesso</string>
 </resources>

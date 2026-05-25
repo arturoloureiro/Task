@@ -57,6 +57,7 @@ class LoginFragment : Fragment() {
         val senha = binding.editextSenha.text.toString().trim()
         if (email.isNotBlank()) {
             if (senha.isNotBlank()) {
+                binding.progressBar.isVisible = true
                 loginUser(email, senha)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty))
@@ -76,6 +77,7 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
+                        binding.progressBar.isVisible = false
                         Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }

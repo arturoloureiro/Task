@@ -27,10 +27,10 @@
     </style>
 
     <style name="bottomSheetDialogWrapper" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 
-    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="BottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/bottomSheetDialogWrapper</item>
     </style>
     <style name="MyRadioButton" parent="Theme.AppCompat.Light">
