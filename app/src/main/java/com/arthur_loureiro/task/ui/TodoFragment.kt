@@ -100,7 +100,8 @@ class TodoFragment : Fragment() {
                     val taskList = mutableListOf<Task>()
 
                     for (ds in snapshot.children){
-                        val task = ds.getValue(Task::class.java) as Task
+                        val task = ds.getValue(Task::class.java) ?: continue
+                        task.syncStatus()
                         taskList.add(task)
                     }
                     taskAdapter.submitList(taskList)

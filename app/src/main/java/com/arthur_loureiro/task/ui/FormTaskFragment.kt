@@ -77,6 +77,7 @@ class FormTaskFragment : Fragment() {
         task.id = reference.database.reference.push().key ?: ""
         task.description = description
         task.status = status
+        task.statusName = status.name
         saveTask()
     } else {
         showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
