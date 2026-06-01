@@ -2,6 +2,9 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
-    id("com.google.gms.google-services") version "4.4.4" apply false
+
+    // O ideal é colocar esses dois no libs.versions.toml também, mas você pode declarar direto aqui se preferir:
+    id("com.google.gms.google-services") version "4.4.2" apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.8.5" apply false
 }
 

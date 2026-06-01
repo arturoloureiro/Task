@@ -71,5 +71,10 @@
         android:id="@+id/formTaskFragment"
         android:name="com.arthur_loureiro.task.ui.FormTaskFragment"
         android:label="fragment_form_task"
-        tools:layout="@layout/fragment_form_task" />
+        tools:layout="@layout/fragment_form_task" >
+        <argument
+            android:name="task"
+            app:argType="com.arthur_loureiro.task.data.model.Task"
+            app:nullable="true" />
+    </fragment>
 </navigation>

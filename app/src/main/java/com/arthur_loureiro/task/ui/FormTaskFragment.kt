@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.arthur_loureiro.task.R
 import com.arthur_loureiro.task.data.model.Status
 import com.arthur_loureiro.task.data.model.Task
@@ -35,6 +37,10 @@ class FormTaskFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
 
+    private val args: FormTaskFragmentArgs by navArgs()
+
+    private val viewModel: TaskViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,7 +57,36 @@ class FormTaskFragment : Fragment() {
         reference = Firebase.database.reference
         auth = Firebase.auth
 
+        getArgs()
         initListener()
+    }
+
+    private fun getArgs(){
+        args.task.let {
+            if (it != null){
+                this.task = it
+                configTask()
+            }
+        }
+    }
+
+    private fun configTask(){
+        newTask = false
+        status = task.status
+        binding.textToolbar.text="Editando..."
+        binding.textToolbar.setText(R.string.text_toolbar_update_form_task_fragment)
+
+        binding.editTextDescricao.setText(task.description)
+        setStatus()
+    }
+
+    private fun setStatus(){
+        val id = when (task.status){
+            Status.TODO -> R.id.rbTodo
+            Status.DOING -> R.id.rbDoing
+            else -> R.id.rbDone
+        }
+        binding.radioGroup.check(id)
     }
 
     private fun initListener() {
@@ -73,8 +108,10 @@ class FormTaskFragment : Fragment() {
     if (description.isNotBlank()){
         binding.progressBar.isVisible = true
 
-        if (newTask) task = Task()
-        task.id = reference.database.reference.push().key ?: ""
+        if (newTask) {
+            task = Task()
+            task.id = reference.database.reference.push().key ?: ""
+        }
         task.description = description
         task.status = status
         task.statusName = status.name
@@ -94,14 +131,25 @@ class FormTaskFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         R.string.text_save_sucess_form_task_fragment,
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 if (newTask){
+                    // Criando nova tarefa
                     findNavController().popBackStack()
                 }else{
+                    // Editando tarefa
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.text_update_sucess_form_task_fragment,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    viewModel.setUpdateTask(task)
                     binding.progressBar.isVisible = false
                 }
                 }else{
                     binding.progressBar.isVisible = false
+                    val errorMessage = result.exception?.message
+                        ?: getString(R.string.error_generic)
                     showBottomSheet(message = getString(R.string.error_generic))
                 }
             }

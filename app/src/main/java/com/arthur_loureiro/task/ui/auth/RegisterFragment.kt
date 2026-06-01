@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.arthur_loureiro.task.R
@@ -12,7 +13,7 @@ import com.arthur_loureiro.task.databinding.FragmentRegisterBinding
 import com.arthur_loureiro.task.util.initToolbar
 import com.arthur_loureiro.task.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
-import androidx.core.view.isVisible
+
 
 class RegisterFragment : Fragment() {
 
@@ -25,15 +26,16 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+
         initToolbar(binding.toolbar)
         initListener()
     }
@@ -47,11 +49,11 @@ class RegisterFragment : Fragment() {
     private fun validateData() {
         val email = binding.editextEmail.text.toString().trim()
         val senha = binding.editextSenha.text.toString().trim()
+
         if (email.isNotBlank()) {
             if (senha.isNotBlank()) {
-                binding.progressBar.isVisible = true  // antes da chamada async: correto
+                binding.progressBar.isVisible = true
                 registerUser(email, senha)
-                // o sucesso real só existe dentro do listener
             } else {
                 showBottomSheet(message = getString(R.string.password_empty))
             }
@@ -59,25 +61,24 @@ class RegisterFragment : Fragment() {
             showBottomSheet(message = getString(R.string.email_empty))
         }
     }
-    
-    private fun registerUser(email: String, password: String){
-        try {
 
+    private fun registerUser(email: String, password: String) {
+        try {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
+                    binding.progressBar.isVisible = false
+
                     if (task.isSuccessful) {
-                        binding.progressBar.isVisible = false
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
-                        binding.progressBar.isVisible = false
-                        Toast.makeText(requireContext(), "Erro!", Toast.LENGTH_SHORT).show()
+                        val errorMessage = task.exception?.message ?: "Erro desconhecido ao registrar"
+                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
-
         } catch (e: Exception) {
+            binding.progressBar.isVisible = false
             Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
         }
-    
     }
 
     override fun onDestroyView() {
